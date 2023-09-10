@@ -1,3 +1,4 @@
+import '@picocss/pico';
 import { compress, EImageType } from 'image-conversion';
 
 const input = document.querySelector('input');
@@ -30,10 +31,10 @@ async function compressFile(file: File): Promise<Blob> {
 	if (file.size < maxSize) return file; // if below 10 MB, don't do anything
 	const name = file.name;
 	const res = await compress(file, {
-		quality, //The compressed image size is 9000kb
+		quality,
 		type: EImageType.JPEG,
 		scale: 1,
-	}); // NoSonar compress to 9MB
+	});
 	quality -= 0.01;	// NoSonar reduce quality by 1%;
 	if (res.size > maxSize) return await compressFile(new File([res], name, { type: 'image/jpeg' }));
 	quality = 1;	// reset quality

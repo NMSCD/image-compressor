@@ -4,18 +4,30 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Image Compressor</title>
 	<script type="module" src="src/main.ts"></script>
+	<style>
+		h1 {
+			text-align: center;
+		}
+
+		.container {
+			margin-block-start: 1rem;
+		}
+	</style>
 </head>
 
 <body>
-	<h1>Image Compressor</h1>
-	<h2>Input</h2>
-	<input type="file">
+	<div class="container">
+		<h1>Image Compressor</h1>
+		<p>Compresses Images to below 10MB</p>
+		<h2>Input</h2>
+		<input type="file">
 
-	<h2>Output</h2>
-	<a href="" id="download" download style="display: none;">Download</a>
-	<p id="status" style="display: none;">Compressing...</p>
+		<h2>Output</h2>
+		<a href="" id="download" download style="display: none;">Download</a>
+		<p id="status" style="display: none;">Compressing...</p>
+	</div>
 </body>
 
 </html>
