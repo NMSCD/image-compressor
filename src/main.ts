@@ -13,9 +13,14 @@ if (input) input.onchange = async (e: Event) => {
 	const file = element.files[0];
 	const compressedFile = await compressFile(file);
 	const dataURI = await getBase64Image(compressedFile);
+	const fullName = file.name;
+	const fullNameArray = fullName.split('.');
+	const extension = fullNameArray.pop();
+	const fileName = fullNameArray.join('.');
 	downloadElement.href = dataURI;
 	statusElement.style.display = 'none';
 	downloadElement.style.display = '';
+	downloadElement.download = `${fileName}-min.${extension}`;
 }
 
 let quality = 1;
