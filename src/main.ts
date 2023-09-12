@@ -29,14 +29,13 @@ let quality = 1;
 async function compressFile(file: File): Promise<Blob> {
 	const maxSize = 10000000;
 	if (file.size < maxSize) return file; // if below 10 MB, don't do anything
-	const name = file.name;
 	const res = await compress(file, {
 		quality,
 		type: EImageType.JPEG,
 		scale: 1,
 	});
 	quality -= 0.01;	// NoSonar reduce quality by 1%;
-	if (res.size > maxSize) return await compressFile(new File([res], name, { type: 'image/jpeg' }));
+	if (res.size > maxSize) return await compressFile(file);	// compress original file with lower quality setting to avoid double compression
 	quality = 1;	// reset quality
 	return res;
 }
