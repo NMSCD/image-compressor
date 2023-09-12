@@ -36,7 +36,7 @@ async function compressFile(file: File): Promise<Blob> {
 		scale: 1,
 	});
 	quality -= 0.01;	// NoSonar reduce quality by 1%;
-	if (res.size > maxSize) return await compressFile(new File([res], name, { type: 'image/jpeg' }));
+	if (res.size > maxSize) return await compressFile(file);	// compress original file with lower quality setting to avoid double compression
 	quality = 1;	// reset quality
 	return res;
 }
