@@ -29,7 +29,6 @@ let quality = 1;
 async function compressFile(file: File): Promise<Blob> {
 	const maxSize = 10000000;
 	if (file.size < maxSize) return file; // if below 10 MB, don't do anything
-	const name = file.name;
 	const res = await compress(file, {
 		quality,
 		type: EImageType.JPEG,
