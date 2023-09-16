@@ -19,6 +19,9 @@ watchEffect(() => {
 });
 
 const fileData = computed(() => URL.createObjectURL(props.fileObj.file));
+
+const computeFileSize = (size: number) =>
+  (size / (1024 * 1024)).toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 }); // NoSonar this is to convert byte to MB
 </script>
 
 <template>
@@ -37,9 +40,9 @@ const fileData = computed(() => URL.createObjectURL(props.fileObj.file));
     </a>
     <div>
       <div><span class="field-title">Name:</span> {{ fileObj.file.name }}</div>
-      <div><span class="field-title">Original Size:</span> {{ (orgSize / (1024 * 1024)).toFixed(1) }}MB</div>
+      <div><span class="field-title">Original Size:</span> {{ computeFileSize(orgSize) }}MB</div>
       <div v-if="compSize">
-        <span class="field-title">Compressed Size:</span> {{ (compSize / (1024 * 1024)).toFixed(1) }}MB
+        <span class="field-title">Compressed Size:</span> {{ computeFileSize(compSize) }}MB
       </div>
     </div>
     <a
