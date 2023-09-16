@@ -2,3 +2,11 @@
   margin-block-start: 1rem;
   margin-block-end: 2rem;
 }
+
+body {
+  scrollbar-gutter: stable;
+}
+
+* {
+  transition: background-color 0.3s;
+}

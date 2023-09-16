@@ -74,14 +74,12 @@ function addFiles(uploadedFiles: FileList) {
 
   &:hover,
   &.drag-active {
-    border-style: solid;
-    border-width: 3px;
+    border: 3px solid;
   }
 
   .drop-title {
     font-weight: bold;
     text-align: center;
-    transition: color 0.2s ease-in-out;
   }
 
   input[type='file'] {
@@ -93,7 +91,6 @@ function addFiles(uploadedFiles: FileList) {
 
     &::file-selector-button {
       padding: 10px 20px;
-      transition: background-color 0.2s ease-in-out;
     }
   }
 }
