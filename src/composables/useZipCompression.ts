@@ -1,4 +1,4 @@
-import JSZip from 'JSZip';
+import JSZip from 'jszip';
 import { storeToRefs } from 'pinia';
 import { useFileDataStore } from '../stores/fileData';
 
