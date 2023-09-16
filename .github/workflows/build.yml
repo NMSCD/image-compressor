@@ -16,14 +16,16 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Build
+      - name: Build App
         run: |
           npm ci
+          echo -n 'VITE_DISCORD_WEBHOOK=' > .env
+          echo '${{ secrets.DISCORD_WEBHOOK }}' | base64 | tr -d "\n\r" >> .env
           npm run build
           cd dist
           touch .nojekyll
