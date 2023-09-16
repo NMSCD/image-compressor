@@ -63,8 +63,8 @@ watch(anyUncompressed, async (newVal) => {
     <div class="explanation-wrapper">
       <p class="explanation">Compresses images to &lt; 10MB.</p>
       <a
-        role="button"
         href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true"
+        role="button"
         target="_blank"
         rel="noopener noreferrer"
         >Open NMS Wiki Image Upload</a
@@ -77,8 +77,8 @@ watch(anyUncompressed, async (newVal) => {
     <div class="buttons">
       <button
         :aria-busy="isCompressing"
-        :disabled="!files.length || !anyUncompressed"
         :class="{ 'is-success': files.length && !anyUncompressed }"
+        :disabled="!files.length || !anyUncompressed"
         @click="compressFiles"
       >
         {{ files.length && !anyUncompressed ? 'All compressed!' : 'Compress' }}
