@@ -29,6 +29,7 @@ function addFiles(uploadedFiles: FileList) {
     const fileObj: FileObj = {
       id: id++,
       isCompressed: false,
+      isTooLarge: false,
       file,
     };
     files.value.push(fileObj);

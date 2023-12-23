@@ -18,11 +18,15 @@ const isZipCompressing = ref(false);
 const anyUncompressed = computed(() => files.value.some((file) => !file.isCompressed));
 
 async function editFileObj(fileObj: FileObj) {
-  const compressedFile = await useImageCompression(fileObj.file);
-  const item = files.value.find((item) => item.id === fileObj.id);
-  if (!item) return;
-  item.file = compressedFile;
-  item.isCompressed = true;
+  try {
+    const compressedFile = await useImageCompression(fileObj.file);
+    const item = files.value.find((item) => item.id === fileObj.id);
+    if (!item) return;
+    item.file = compressedFile;
+    item.isCompressed = true;
+  } catch {
+    fileObj.isTooLarge = true;
+  }
 }
 
 async function compressFiles() {
