@@ -41,8 +41,12 @@ const computeFileSize = (size: number) =>
     <div>
       <div><span class="field-title">Name:</span> {{ fileObj.file.name }}</div>
       <div><span class="field-title">Original Size:</span> {{ computeFileSize(orgSize) }}MB</div>
-      <div v-if="compSize">
-        <span class="field-title">Compressed Size:</span> {{ computeFileSize(compSize) }}MB
+      <div v-if="compSize"><span class="field-title">Compressed Size:</span> {{ computeFileSize(compSize) }}MB</div>
+      <div
+        v-if="fileObj.isTooLarge"
+        class="error"
+      >
+        <span class="field-title">Error:</span> File is too large!
       </div>
     </div>
     <a
@@ -76,6 +80,10 @@ const computeFileSize = (size: number) =>
 
   .field-title {
     font-weight: bold;
+  }
+
+  .error {
+    color: red;
   }
 
   .delete-button {
