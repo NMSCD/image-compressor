@@ -19,7 +19,7 @@ const images: CivImageProps[] = [
   {
     link: 'https://nmscd.com/',
     imgAlt: 'NMSCD',
-    img: 'https://avatars.githubusercontent.com/u/62565964?s=280&v=4',
+    img: 'https://raw.githubusercontent.com/NMSCD/About/master/logo/NMSCD.png',
   },
 ];
 </script>
