@@ -1,2 +1,2 @@
 # image-compressor
-Compresses Images to below 10MB.
+Compresses Images to below 10MB
