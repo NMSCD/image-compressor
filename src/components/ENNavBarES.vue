@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import ThemeSwitch from './ThemeSwitchES.vue';
+import ENThemeSwitchES from './ENThemeSwitchES.vue';
 </script>
 
 <template>
   <nav>
     <ul>
       <li>
-        <a href="..">&larr; Volver a la página principal</a>
+        <a href="..">&larr; View other pages | Ver otras páginas</a>
       </li>
     </ul>
     <ul>
       <li>
-        <ThemeSwitch />
+        <ENThemeSwitchES />
       </li>
     </ul>
   </nav>

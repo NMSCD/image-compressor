@@ -2,6 +2,8 @@
 import PageLink from './PageLink.vue';
 import CivImage from './CivImage.vue';
 import type { CivImageProps, PageLinkProps } from './objects';
+import NavBar from './components/ENNavBarES.vue';
+
 
 
 const links: PageLinkProps[] = [
@@ -25,6 +27,8 @@ const images: CivImageProps[] = [
 </script>
 
 <template>
+  <NavBar/>
+
   <h1 class="title">
     Image Compressor
     <br>

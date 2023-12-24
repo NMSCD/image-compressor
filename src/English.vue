@@ -58,10 +58,10 @@ watch(anyUncompressed, async (newVal) => {
 </script>
 
 <template>
-  <header>
-    <NavBar />
-    <h1 class="title">Image Compressor</h1>
-  </header>
+    <header>
+  <NavBar/>
+      <h1 class="title">Image Compressor</h1>
+    </header>
 
   <main>
     <div class="explanation-wrapper">
