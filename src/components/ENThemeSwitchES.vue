@@ -12,7 +12,12 @@ function switchTheme(theme: string | undefined = undefined) {
 </script>
 
 <template>
-  <button role="button" class="themeswitcher" id="themeSwitch" @click="switchTheme()">
+  <button
+    role="button"
+    class="themeswitcher"
+    id="themeSwitch"
+    @click="switchTheme()"
+  >
     Switch Theme | Cambiar Tema
   </button>
 </template>

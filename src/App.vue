@@ -9,7 +9,6 @@ import { storeToRefs } from 'pinia';
 const staticPageData = useStaticPageDataStore();
 const { route: currentRoute } = storeToRefs(staticPageData);
 
-
 const router: { [key: string]: Component } = {
   english: English,
   spanish: Spanish,

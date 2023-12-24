@@ -12,7 +12,12 @@ const title = computed(() => {
 </script>
 
 <template>
-  <a :href="url" :title="title" class="button is-link is-outlined">{{ text }}</a>
+  <a
+    :href="url"
+    :title="title"
+    class="button is-link is-outlined"
+    >{{ text }}</a
+  >
 </template>
 
 <style scoped lang="scss">

@@ -26,20 +26,41 @@ const computeFileSize = (size: number) =>
 
 <template>
   <div class="file-item">
-    <a :href="fileData" rel="noopener noreferrer" target="_blank">
-      <img :src="fileData" class="preview" alt="Image preview" width="200" />
+    <a
+      :href="fileData"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
+        :src="fileData"
+        class="preview"
+        alt="Image preview"
+        width="200"
+      />
     </a>
     <div>
       <div><span class="field-title">Nombre:</span> {{ fileObj.file.name }}</div>
       <div><span class="field-title">Tamaño original:</span> {{ computeFileSize(orgSize) }}MB</div>
       <div v-if="compSize"><span class="field-title">Tamaño comprimido:</span> {{ computeFileSize(compSize) }}MB</div>
-      <div v-if="fileObj.isTooLarge" class="error">
+      <div
+        v-if="fileObj.isTooLarge"
+        class="error"
+      >
         <span class="field-title">Error:</span> ¡El archivo es demasiado grande!
       </div>
     </div>
-    <a :aria-disabled="!fileObj.isCompressed" :class="{ secondary: !fileObj.isCompressed }"
-      :href="fileObj.isCompressed ? fileData : undefined" role="button" download>Download</a>
-    <button class="secondary delete-button" @click="$emit('remove')">
+    <a
+      :aria-disabled="!fileObj.isCompressed"
+      :class="{ secondary: !fileObj.isCompressed }"
+      :href="fileObj.isCompressed ? fileData : undefined"
+      role="button"
+      download
+      >Download</a
+    >
+    <button
+      class="secondary delete-button"
+      @click="$emit('remove')"
+    >
       ❌
     </button>
   </div>

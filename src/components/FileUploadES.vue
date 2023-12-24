@@ -38,10 +38,22 @@ function addFiles(uploadedFiles: FileList) {
 </script>
 
 <template>
-  <label for="fileUpload" class="drop-container" :class="{ 'drag-active': dragActive }" @dragenter="dragActive = true"
-    @dragleave="dragActive = false" @drop.prevent="dropFile" @dragover.prevent>
+  <label
+    for="fileUpload"
+    class="drop-container"
+    :class="{ 'drag-active': dragActive }"
+    @dragenter="dragActive = true"
+    @dragleave="dragActive = false"
+    @drop.prevent="dropFile"
+    @dragover.prevent
+  >
     <span class="drop-title">Suelta los archivos aquí</span>
-    <input type="file" id="fileUpload" multiple @change="uploadFile" />
+    <input
+      type="file"
+      id="fileUpload"
+      multiple
+      @change="uploadFile"
+    />
   </label>
 </template>
 
