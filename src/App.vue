@@ -3,7 +3,7 @@ import { type Component } from 'vue';
 import Home from './Home.vue';
 import English from './English.vue';
 import Spanish from './Spanish.vue';
-import {  useStaticPageDataStore } from './stores/pageData';
+import { useStaticPageDataStore } from './stores/pageData';
 import { storeToRefs } from 'pinia';
 
 const staticPageData = useStaticPageDataStore();

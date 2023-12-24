@@ -27,7 +27,7 @@ const images: CivImageProps[] = [
 </script>
 
 <template>
-  <NavBar/>
+  <NavBar />
 
   <h1 class="title">
     Image Compressor
@@ -35,31 +35,20 @@ const images: CivImageProps[] = [
     Compresor de imágenes
   </h1>
 
-  <div class="subtitle is-4" style="text-align:center">Select what language you want <br> Elija el idioma en el que vaya usar la app</div>
+  <div class="subtitle is-4" style="text-align:center">Select what language you want <br> Elija el idioma en el que vaya
+    usar la app</div>
 
   <nav aria-label="Subpages" class="page-options">
-    <PageLink
-      v-for="link in links"
-      :key="link.url"
-      :url="link.url"
-      :text="link.text"
-      :disabled="link.inactive"
-    />
+    <PageLink v-for="link in links" :key="link.url" :url="link.url" :text="link.text" :disabled="link.inactive" />
   </nav>
   <div class="images">
-    <CivImage
-      v-for="image in images"
-      :img="image.img"
-      :img-alt="image.imgAlt"
-      :link="image.link"
-    />
+    <CivImage v-for="image in images" :img="image.img" :img-alt="image.imgAlt" :link="image.link" />
   </div>
 </template>
 
 
 
 <style scoped lang="scss">
-
 body {
   display: flex;
   justify-content: center;
@@ -74,17 +63,21 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1.5em;
-  justify-items: center; /* Centers the content horizontally */
-  align-items: center; /* Centers the content vertically */
+  justify-items: center;
+  /* Centers the content horizontally */
+  align-items: center;
+  /* Centers the content vertically */
 }
 
 .title {
   margin-block-end: 2rem;
   text-align: center;
 }
+
 .subtitle.is-4 {
   text-align: center;
 }
+
 .images {
   display: flex;
   justify-content: center;
@@ -92,6 +85,4 @@ body {
   flex-direction: column;
   margin: 3em auto;
 }
-
-
 </style>

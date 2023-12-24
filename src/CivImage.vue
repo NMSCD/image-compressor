@@ -5,15 +5,8 @@ defineProps<CivImageProps>();
 </script>
 
 <template>
-  <a
-    :href="link"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <img
-      :src="img"
-      :alt="imgAlt"
-    />
+  <a :href="link" target="_blank" rel="noopener noreferrer">
+    <img :src="img" :alt="imgAlt" />
   </a>
 </template>
 

@@ -5,11 +5,9 @@ import vue from '@vitejs/plugin-vue';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: '/Image-Compressor/',
-	plugins: [
-		vue(),
-	],
-    build: {
+  base: '/Image-Compressor/',
+  plugins: [vue()],
+  build: {
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
@@ -18,11 +16,9 @@ export default defineConfig({
       },
     },
   },
-	resolve: {
-		alias: {
-			'@': fileURLToPath(new URL('./src', import.meta.url))
-		}
-	}
-})
-
-
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+});

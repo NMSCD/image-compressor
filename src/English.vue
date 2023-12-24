@@ -58,59 +58,35 @@ watch(anyUncompressed, async (newVal) => {
 </script>
 
 <template>
-    <header>
-  <NavBar/>
-      <h1 class="title">Image Compressor</h1>
-    </header>
+  <header>
+    <NavBar />
+    <h1 class="title">Image Compressor</h1>
+  </header>
 
   <main>
     <div class="explanation-wrapper">
       <p class="explanation">Compresses images to &lt; 10MB.</p>
-      <a
-        href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true"
-        role="button"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Open NMS Wiki Image Upload</a
-      >
+      <a href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" role="button" target="_blank"
+        rel="noopener noreferrer">Open NMS Wiki Image Upload</a>
     </div>
     <h2 class="subheading">Input</h2>
     <FileUpload />
 
     <h2 class="subheading">File List</h2>
     <div class="buttons">
-      <button
-        :aria-busy="isCompressing"
-        :class="{ 'is-success': files.length && !anyUncompressed }"
-        :disabled="!files.length || !anyUncompressed"
-        @click="compressFiles"
-      >
+      <button :aria-busy="isCompressing" :class="{ 'is-success': files.length && !anyUncompressed }"
+        :disabled="!files.length || !anyUncompressed" @click="compressFiles">
         {{ files.length && !anyUncompressed ? 'All compressed!' : 'Compress' }}
       </button>
-      <a
-        :aria-busy="isZipCompressing"
-        :aria-disabled="!zipData"
-        :href="zipData || undefined"
-        role="button"
-        download
-      >
+      <a :aria-busy="isZipCompressing" :aria-disabled="!zipData" :href="zipData || undefined" role="button" download>
         Download ZIP
       </a>
-      <button
-        :disabled="!files.length"
-        class="secondary"
-        @click="files = []"
-      >
+      <button :disabled="!files.length" class="secondary" @click="files = []">
         Clear List
       </button>
     </div>
     <div class="file-list">
-      <FileItem
-        v-for="file in files"
-        :key="file.id"
-        :file-obj="file"
-        @remove="removeItem(file)"
-      />
+      <FileItem v-for="file in files" :key="file.id" :file-obj="file" @remove="removeItem(file)" />
     </div>
   </main>
 </template>
@@ -161,7 +137,7 @@ watch(anyUncompressed, async (newVal) => {
   flex-wrap: wrap;
   margin-block-end: 1rem;
 
-  & > * {
+  &>* {
     flex-grow: 1;
     width: fit-content;
     height: fit-content;

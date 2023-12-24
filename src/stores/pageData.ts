@@ -23,5 +23,3 @@ export const useStaticPageDataStore = defineStore('staticPageData', {
     debug: false,
   }),
 });
-
-
