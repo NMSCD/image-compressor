@@ -18,7 +18,7 @@
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "composite": true,
-    "baseUrl": "/Image-Compressor/",
+    "baseUrl": "/Compresor-Imagenes/",
     "paths": {
       "@/*": ["./src/*"]
     }
