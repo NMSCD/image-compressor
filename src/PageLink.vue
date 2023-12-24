@@ -4,11 +4,7 @@ import { computed } from 'vue';
 
 const props = defineProps<PageLinkProps>();
 
-const title = computed(() => {
-  const vowels = 'aeiou';
-  const firstLetter = props.text.slice(0, 1).toLowerCase();
-  return `Compress ${vowels.includes(firstLetter) ? 'a' : 'an'} photo in ${props.text}`;
-});
+const title = `Compress a photo in ${props.text}`;
 </script>
 
 <template>
