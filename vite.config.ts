@@ -9,6 +9,15 @@ export default defineConfig({
 	plugins: [
 		vue(),
 	],
+    build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        spanish: resolve(__dirname, 'spanish.html'),
+        english: resolve(__dirname, 'english.html'),
+      },
+    },
+  },
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url))
