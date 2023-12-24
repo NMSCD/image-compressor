@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import PageLink from './PageLink.vue';
 import CivImage from './CivImage.vue';
-import type { CivImageProps, PageLinkProps } from './objects';
+import type { CivImageProps, PageLinkProps } from './types';
 import NavBar from './components/ENNavBarES.vue';
 
 const links: PageLinkProps[] = [
@@ -101,3 +101,4 @@ body {
   margin: 3em auto;
 }
 </style>
+./types

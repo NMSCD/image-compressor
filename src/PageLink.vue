@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { PageLinkProps } from './objects';
-import { computed } from 'vue';
+import type { PageLinkProps } from './types';
 
 const props = defineProps<PageLinkProps>();
 
