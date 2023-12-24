@@ -6,7 +6,7 @@ import ThemeSwitch from './ThemeSwitchES.vue';
   <nav>
     <ul>
       <li>
-        <a href="..">&larr; Volver a la página principal</a>
+        <a href="./" title="Página principal">&larr; Volver a la página principal</a>
       </li>
     </ul>
     <ul>
