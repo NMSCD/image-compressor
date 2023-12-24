@@ -11,7 +11,6 @@ const title = `Compress a photo in ${props.text}`;
   <a
     :href="url"
     :title="title"
-    class="button is-link is-outlined"
     >{{ text }}</a
   >
 </template>
