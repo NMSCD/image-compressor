@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CivImageProps } from './objects';
+import type { CivImageProps } from './types';
 
 defineProps<CivImageProps>();
 </script>
