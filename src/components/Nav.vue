@@ -25,7 +25,7 @@
 import { watch, ref } from "vue";
 import { useI18n } from "../hooks/useI18n";
 
-const { t, locale } = useI18n();
+const { locale } = useI18n();
 
 type Locales = typeof locale.value;
 
