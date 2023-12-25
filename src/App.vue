@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NavBar from './components/NavBarThemeSwitch.vue';
+import ThemeSwitch from './components/ThemeSwitch.vue';
 import Nav from './components/Nav.vue';
 import FileUpload from './components/FileUpload.vue';
 import FileItem from './components/FileItem.vue';
@@ -61,7 +61,7 @@ watch(anyUncompressed, async (newVal) => {
 <template>
   <header>
     <Nav />
-    <NavBar />
+    <ThemeSwitch />
     <h1 class="title">{{ $t("home.header") }}</h1>
   </header>
 

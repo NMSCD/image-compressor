@@ -12,12 +12,16 @@ function switchTheme(theme: string | undefined = undefined) {
 </script>
 
 <template>
-  <button
-    role="button"
-    class="themeswitcher"
-    id="themeSwitch"
-    @click="switchTheme()"
-  >
-  {{ $t("themeswitch.switchtheme") }}
-  </button>
+  <div style="text-align: right;">
+    <button
+      role="button"
+      class="themeswitcher"
+      id="themeSwitch"
+      @click="switchTheme()"
+      style="width: auto;"
+    >
+      {{ $t("themeswitch.switchtheme") }}
+    </button>
+  </div>
 </template>
+
