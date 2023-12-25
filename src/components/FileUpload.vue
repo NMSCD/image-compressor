@@ -47,7 +47,7 @@ function addFiles(uploadedFiles: FileList) {
     @drop.prevent="dropFile"
     @dragover.prevent
   >
-    <span class="drop-title">{{ $t("fileupload.dropfiles") }}</span>
+    <span class="drop-title">{{ $t("translation.dropfiles") }}</span>
     <input
       type="file"
       id="fileUpload"

@@ -1,3 +1,4 @@
+
 <script setup lang="ts">
 import ThemeSwitch from './components/ThemeSwitch.vue';
 import Nav from './components/Nav.vue';
@@ -56,30 +57,31 @@ watch(anyUncompressed, async (newVal) => {
     isZipCompressing.value = false;
   }
 });
+
 </script>
 
 <template>
   <header>
     <Nav />
     <ThemeSwitch />
-    <h1 class="title">{{ $t("home.header") }}</h1>
+    <h1 class="title">{{ $t("translation.header") }}</h1>
   </header>
 
   <main>
     <div class="explanation-wrapper">
-      <p class="explanation">{{ $t("home.subtitle") }}</p>
+      <p class="explanation">{{ $t("translation.subtitle") }}</p>
       <a
         href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true"
         role="button"
         target="_blank"
         rel="noopener noreferrer"
-        >{{ $t("home.buttonwiki") }}</a
+        >{{ $t("translation.buttonwiki") }}</a
       >
     </div>
-    <h2 class="subheading">{{ $t("home.input") }}</h2>
+    <h2 class="subheading">{{ $t("translation.input") }}</h2>
     <FileUpload />
 
-    <h2 class="subheading">{{ $t("home.filelist") }}</h2>
+    <h2 class="subheading">{{ $t("translation.filelist") }}</h2>
     <div class="buttons">
       <button
         :aria-busy="isCompressing"
@@ -88,8 +90,8 @@ watch(anyUncompressed, async (newVal) => {
         @click="compressFiles"
       >
       {{ files.length && !anyUncompressed
-    ? $t("home.allcompressed")
-    : $t("home.compress")
+    ? $t("translation.allcompressed")
+    : $t("translation.compress")
 }}      </button>
       <a
         :aria-busy="isZipCompressing"
@@ -98,14 +100,14 @@ watch(anyUncompressed, async (newVal) => {
         role="button"
         download
       >
-      {{ $t("home.downloadzip") }}
+      {{ $t("translation.downloadzip") }}
       </a>
       <button
         :disabled="!files.length"
         class="secondary"
         @click="files = []"
       >
-      {{ $t("home.clearlist") }}
+      {{ $t("translation.clearlist") }}
       </button>
     </div>
     <div class="file-list">

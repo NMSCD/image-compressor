@@ -2,25 +2,37 @@
     <nav>
     <ul>
       <li>
-        <a href=".." title="Other pages">← {{ $t("nav.viewother") }}</a>
+        <a href=".." title="Other pages">← {{ $t("translation.viewother") }}</a>
       </li>
     </ul>
     <ul>
       <li>
-        <LanguageSwitcher></LanguageSwitcher>
+        <select v-model="selectedLocale">
+    <option
+      v-for="locale in $i18n.availableLocales"
+      :key="`locale-${locale}`"
+      :value="locale"
+    >
+      {{ locale }}
+    </option>
+  </select>
       </li>
     </ul>
   </nav>
 </template>
 
-<script>
-import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
-import Tr from "@/i18n/translation.js";
+<script setup lang="ts">
+import { watch, ref } from "vue";
+import { useI18n } from "../hooks/useI18n";
 
-export default {
-  components: { LanguageSwitcher },
-  setup() {
-    return { Tr };
-  },
-};
+const { t, locale } = useI18n();
+
+type Locales = typeof locale.value;
+
+const selectedLocale = ref<Locales>(locale.value);
+
+watch(selectedLocale, (newVal) => {
+  locale.value = newVal;
+  localStorage.setItem("lang", newVal);
+});
 </script>

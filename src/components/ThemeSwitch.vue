@@ -20,7 +20,7 @@ function switchTheme(theme: string | undefined = undefined) {
       @click="switchTheme()"
       style="width: auto;"
     >
-      {{ $t("themeswitch.switchtheme") }}
+      {{ $t("translation.switchtheme") }}
     </button>
   </div>
 </template>
