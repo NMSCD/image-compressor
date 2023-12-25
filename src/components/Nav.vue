@@ -15,8 +15,7 @@
 
 <script>
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
-import Tr from "@/i18n/translation";
-import ThemeSwitch from './ThemeSwitch.vue';
+import Tr from "@/i18n/translation.js";
 
 export default {
   components: { LanguageSwitcher },
