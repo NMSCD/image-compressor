@@ -39,14 +39,14 @@ const computeFileSize = (size: number) =>
       />
     </a>
     <div>
-      <div><span class="field-title">Name:</span> {{ fileObj.file.name }}</div>
-      <div><span class="field-title">Original Size:</span> {{ computeFileSize(orgSize) }}MB</div>
-      <div v-if="compSize"><span class="field-title">Compressed Size:</span> {{ computeFileSize(compSize) }}MB</div>
+      <div><span class="field-title">{{ $t("fileitem.name") }}</span> {{ fileObj.file.name }}</div>
+      <div><span class="field-title">{{ $t("fileitem.originalsize") }}</span> {{ computeFileSize(orgSize) }}MB</div>
+      <div v-if="compSize"><span class="field-title">{{ $t("fileitem.compressedsize") }}</span> {{ computeFileSize(compSize) }}MB</div>
       <div
         v-if="fileObj.isTooLarge"
         class="error"
       >
-        <span class="field-title">Error:</span> File is too large!
+        <span class="field-title">{{ $t("fileitem.error") }}</span> {{ $t("fileitem.filetoolarge") }}
       </div>
     </div>
     <a
@@ -55,7 +55,7 @@ const computeFileSize = (size: number) =>
       :href="fileObj.isCompressed ? fileData : undefined"
       role="button"
       download
-      >Download</a
+      >{{ $t("fileitem.download") }}</a
     >
     <button
       class="secondary delete-button"

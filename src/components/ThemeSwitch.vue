@@ -18,6 +18,6 @@ function switchTheme(theme: string | undefined = undefined) {
     id="themeSwitch"
     @click="switchTheme()"
   >
-    Switch Theme
+  {{ $t("themeswitch.switchtheme") }}
   </button>
 </template>

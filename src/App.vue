@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import NavBar from './components/NavBar.vue';
+import NavBar from './components/NavBarThemeSwitch.vue';
+import Nav from './components/Nav.vue';
 import FileUpload from './components/FileUpload.vue';
 import FileItem from './components/FileItem.vue';
 import { useFileDataStore } from './stores/fileData';
 import { storeToRefs } from 'pinia';
-import type { FileObj } from './types/file';
+import type { FileObj } from './file';
 import { computed, ref, watch } from 'vue';
 import { useImageCompression } from './composables/useImageCompression';
 import { useZipCompression } from './composables/useZipCompression';
@@ -59,25 +60,26 @@ watch(anyUncompressed, async (newVal) => {
 
 <template>
   <header>
+    <Nav />
     <NavBar />
-    <h1 class="title">Image Compressor</h1>
+    <h1 class="title">{{ $t("home.header") }}</h1>
   </header>
 
   <main>
     <div class="explanation-wrapper">
-      <p class="explanation">Compresses images to &lt; 10MB.</p>
+      <p class="explanation">{{ $t("home.subtitle") }}</p>
       <a
         href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true"
         role="button"
         target="_blank"
         rel="noopener noreferrer"
-        >Open NMS Wiki Image Upload</a
+        >{{ $t("home.buttonwiki") }}</a
       >
     </div>
-    <h2 class="subheading">Input</h2>
+    <h2 class="subheading">{{ $t("home.input") }}</h2>
     <FileUpload />
 
-    <h2 class="subheading">File List</h2>
+    <h2 class="subheading">{{ $t("home.filelist") }}</h2>
     <div class="buttons">
       <button
         :aria-busy="isCompressing"
@@ -85,8 +87,10 @@ watch(anyUncompressed, async (newVal) => {
         :disabled="!files.length || !anyUncompressed"
         @click="compressFiles"
       >
-        {{ files.length && !anyUncompressed ? 'All compressed!' : 'Compress' }}
-      </button>
+      {{ files.length && !anyUncompressed
+    ? $t("home.allcompressed")
+    : $t("home.compress")
+}}      </button>
       <a
         :aria-busy="isZipCompressing"
         :aria-disabled="!zipData"
@@ -94,14 +98,14 @@ watch(anyUncompressed, async (newVal) => {
         role="button"
         download
       >
-        Download ZIP
+      {{ $t("home.downloadzip") }}
       </a>
       <button
         :disabled="!files.length"
         class="secondary"
         @click="files = []"
       >
-        Clear List
+      {{ $t("home.clearlist") }}
       </button>
     </div>
     <div class="file-list">
