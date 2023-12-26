@@ -1,8 +1,4 @@
 export default {
-  hello: 'Hello',
-  en: 'English',
-  es: 'Español',
-  home: 'Home',
   viewother: 'View other pages',
   switchtheme: 'Switch Theme',
   dropfiles: 'Drop files here',

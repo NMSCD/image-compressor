@@ -1,9 +1,4 @@
 export default {
-  hello: 'Kaixo',
-  en: 'English',
-  es: 'Español',
-  eu: 'Euskera',
-  home: 'Orrialde nagusia',
   viewother: 'Ikusi beste orrialde batzuk',
   switchtheme: 'Itxura aldatu',
   dropfiles: 'Askatu fitxategiak hemen',
