@@ -5,8 +5,7 @@ import ThemeSwitch from './ThemeSwitch.vue';
 <template>
   <nav>
     <ul>
-      <li>
-      </li>
+      <li></li>
     </ul>
     <ul>
       <li>

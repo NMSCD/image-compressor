@@ -39,14 +39,20 @@ const computeFileSize = (size: number) =>
       />
     </a>
     <div>
-      <div><span class="field-title">{{ $t("translation.name") }}</span> {{ fileObj.file.name }}</div>
-      <div><span class="field-title">{{ $t("translation.originalsize") }}</span> {{ computeFileSize(orgSize) }}MB</div>
-      <div v-if="compSize"><span class="field-title">{{ $t("translation.compressedsize") }}</span> {{ computeFileSize(compSize) }}MB</div>
+      <div>
+        <span class="field-title">{{ $t('translation.name') }}</span> {{ fileObj.file.name }}
+      </div>
+      <div>
+        <span class="field-title">{{ $t('translation.originalsize') }}</span> {{ computeFileSize(orgSize) }}MB
+      </div>
+      <div v-if="compSize">
+        <span class="field-title">{{ $t('translation.compressedsize') }}</span> {{ computeFileSize(compSize) }}MB
+      </div>
       <div
         v-if="fileObj.isTooLarge"
         class="error"
       >
-        <span class="field-title">{{ $t("translation.error") }}</span> {{ $t("translation.filetoolarge") }}
+        <span class="field-title">{{ $t('translation.error') }}</span> {{ $t('translation.filetoolarge') }}
       </div>
     </div>
     <a
@@ -55,7 +61,7 @@ const computeFileSize = (size: number) =>
       :href="fileObj.isCompressed ? fileData : undefined"
       role="button"
       download
-      >{{ $t("translation.download") }}</a
+      >{{ $t('translation.download') }}</a
     >
     <button
       class="secondary delete-button"

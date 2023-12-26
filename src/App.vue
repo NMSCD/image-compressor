@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import ThemeSwitch from './components/ThemeSwitch.vue';
 import Nav from './components/Nav.vue';
@@ -6,7 +5,7 @@ import FileUpload from './components/FileUpload.vue';
 import FileItem from './components/FileItem.vue';
 import { useFileDataStore } from './stores/fileData';
 import { storeToRefs } from 'pinia';
-import type { FileObj } from './file';
+import type { FileObj } from './types/file';
 import { computed, ref, watch } from 'vue';
 import { useImageCompression } from './composables/useImageCompression';
 import { useZipCompression } from './composables/useZipCompression';
@@ -57,31 +56,30 @@ watch(anyUncompressed, async (newVal) => {
     isZipCompressing.value = false;
   }
 });
-
 </script>
 
 <template>
   <header>
     <Nav />
     <ThemeSwitch />
-    <h1 class="title">{{ $t("translation.header") }}</h1>
+    <h1 class="title">{{ $t('translation.header') }}</h1>
   </header>
 
   <main>
     <div class="explanation-wrapper">
-      <p class="explanation">{{ $t("translation.subtitle") }}</p>
+      <p class="explanation">{{ $t('translation.subtitle') }}</p>
       <a
         href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true"
         role="button"
         target="_blank"
         rel="noopener noreferrer"
-        >{{ $t("translation.buttonwiki") }}</a
+        >{{ $t('translation.buttonwiki') }}</a
       >
     </div>
-    <h2 class="subheading">{{ $t("translation.input") }}</h2>
+    <h2 class="subheading">{{ $t('translation.input') }}</h2>
     <FileUpload />
 
-    <h2 class="subheading">{{ $t("translation.filelist") }}</h2>
+    <h2 class="subheading">{{ $t('translation.filelist') }}</h2>
     <div class="buttons">
       <button
         :aria-busy="isCompressing"
@@ -89,10 +87,8 @@ watch(anyUncompressed, async (newVal) => {
         :disabled="!files.length || !anyUncompressed"
         @click="compressFiles"
       >
-      {{ files.length && !anyUncompressed
-    ? $t("translation.allcompressed")
-    : $t("translation.compress")
-}}      </button>
+        {{ files.length && !anyUncompressed ? $t('translation.allcompressed') : $t('translation.compress') }}
+      </button>
       <a
         :aria-busy="isZipCompressing"
         :aria-disabled="!zipData"
@@ -100,14 +96,14 @@ watch(anyUncompressed, async (newVal) => {
         role="button"
         download
       >
-      {{ $t("translation.downloadzip") }}
+        {{ $t('translation.downloadzip') }}
       </a>
       <button
         :disabled="!files.length"
         class="secondary"
         @click="files = []"
       >
-      {{ $t("translation.clearlist") }}
+        {{ $t('translation.clearlist') }}
       </button>
     </div>
     <div class="file-list">

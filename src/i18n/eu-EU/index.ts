@@ -1,5 +1,5 @@
-import translation from "./translation";
+import translation from './translation';
 
 export default {
-	translation
-}
+  translation,
+};

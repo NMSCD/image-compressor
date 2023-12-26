@@ -16,16 +16,14 @@ type Leaves<ObjectType> = ObjectType extends Record<string, unknown>
     { [Key in keyof ObjectType]-?: Join<Key, Leaves<ObjectType[Key]>> }[keyof ObjectType]
   : '';
 
-export type I18NLeaves = Leaves<typeof messages['Español']>;
+export type I18NLeaves = Leaves<(typeof messages)['Español']>;
 
 // This function adds type safety to the i18n t function.
 export function useI18n() {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { t, te, d, n, tm, rt, ...globalApi } = i18n.global;
 
-  type RemoveFirstFromTuple<T extends unknown[]> = ((...b: T) => void) extends (...b: infer I) => void
-    ? I
-    : [];
+  type RemoveFirstFromTuple<T extends unknown[]> = ((...b: T) => void) extends (...b: infer I) => void ? I : [];
 
   const typedT = t as (...args: [I18NLeaves, ...Partial<RemoveFirstFromTuple<Parameters<typeof t>>>]) => string;
 
