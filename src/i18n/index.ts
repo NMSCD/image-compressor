@@ -11,9 +11,7 @@ const messages = {
   Deutsch,
 };
 
-const languageMap: {
-  [key: string]: string[];
-} = {
+const languageMap = {
   Español: ['es', 'es-ES'],
   English: ['en', 'en-EN', 'en-GB', 'en-US'],
   Euskara: ['eu', 'eu-EU'],
