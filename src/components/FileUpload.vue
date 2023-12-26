@@ -3,8 +3,11 @@ import { ref } from 'vue';
 import { useFileDataStore } from '../stores/fileData';
 import { storeToRefs } from 'pinia';
 import type { FileObj } from '../types/file';
+import { useI18n } from '../hooks/useI18n';
 
 const dragActive = ref(false);
+
+const { t } = useI18n();
 
 let id = 0;
 
@@ -39,19 +42,19 @@ function addFiles(uploadedFiles: FileList) {
 
 <template>
   <label
-    for="fileUpload"
-    class="drop-container"
     :class="{ 'drag-active': dragActive }"
+    class="drop-container"
+    for="fileUpload"
     @dragenter="dragActive = true"
     @dragleave="dragActive = false"
-    @drop.prevent="dropFile"
     @dragover.prevent
+    @drop.prevent="dropFile"
   >
-    <span class="drop-title">{{ $t('translation.dropfiles') }}</span>
+    <span class="drop-title">{{ t('translation.dropfiles') }}</span>
     <input
-      type="file"
       id="fileUpload"
       multiple
+      type="file"
       @change="uploadFile"
     />
   </label>

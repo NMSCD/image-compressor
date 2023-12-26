@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, ref, watchEffect } from 'vue';
 import type { FileObj } from '../types/file';
+import { useI18n } from '../hooks/useI18n';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   fileObj: FileObj;
@@ -33,26 +36,26 @@ const computeFileSize = (size: number) =>
     >
       <img
         :src="fileData"
-        class="preview"
         alt="Image preview"
+        class="preview"
         width="200"
       />
     </a>
     <div>
       <div>
-        <span class="field-title">{{ $t('translation.name') }}</span> {{ fileObj.file.name }}
+        <span class="field-title">{{ t('translation.name') }}</span> {{ fileObj.file.name }}
       </div>
       <div>
-        <span class="field-title">{{ $t('translation.originalsize') }}</span> {{ computeFileSize(orgSize) }}MB
+        <span class="field-title">{{ t('translation.originalsize') }}</span> {{ computeFileSize(orgSize) }}MB
       </div>
       <div v-if="compSize">
-        <span class="field-title">{{ $t('translation.compressedsize') }}</span> {{ computeFileSize(compSize) }}MB
+        <span class="field-title">{{ t('translation.compressedsize') }}</span> {{ computeFileSize(compSize) }}MB
       </div>
       <div
         v-if="fileObj.isTooLarge"
         class="error"
       >
-        <span class="field-title">{{ $t('translation.error') }}</span> {{ $t('translation.filetoolarge') }}
+        <span class="field-title">{{ t('translation.error') }}</span> {{ t('translation.filetoolarge') }}
       </div>
     </div>
     <a
@@ -61,7 +64,7 @@ const computeFileSize = (size: number) =>
       :href="fileObj.isCompressed ? fileData : undefined"
       role="button"
       download
-      >{{ $t('translation.download') }}</a
+      >{{ t('translation.download') }}</a
     >
     <button
       class="secondary delete-button"
