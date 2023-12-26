@@ -8,6 +8,9 @@ import type { FileObj } from './types/file';
 import { computed, ref, watch } from 'vue';
 import { useImageCompression } from './composables/useImageCompression';
 import { useZipCompression } from './composables/useZipCompression';
+import { useI18n } from './hooks/useI18n';
+
+const { t } = useI18n();
 
 const fileDataStore = useFileDataStore();
 const { files } = storeToRefs(fileDataStore);
@@ -60,24 +63,24 @@ watch(anyUncompressed, async (newVal) => {
 <template>
   <header>
     <NavBar />
-    <h1 class="title">Image Compressor</h1>
+    <h1 class="title">{{ t('translation.header') }}</h1>
   </header>
 
   <main>
     <div class="explanation-wrapper">
-      <p class="explanation">Compresses images to &lt; 10MB.</p>
+      <p class="explanation">{{ t('translation.subtitle') }}</p>
       <a
         href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true"
         role="button"
         target="_blank"
         rel="noopener noreferrer"
-        >Open NMS Wiki Image Upload</a
+        >{{ t('translation.buttonwiki') }}</a
       >
     </div>
-    <h2 class="subheading">Input</h2>
+    <h2 class="subheading">{{ t('translation.input') }}</h2>
     <FileUpload />
 
-    <h2 class="subheading">File List</h2>
+    <h2 class="subheading">{{ t('translation.filelist') }}</h2>
     <div class="buttons">
       <button
         :aria-busy="isCompressing"
@@ -85,7 +88,7 @@ watch(anyUncompressed, async (newVal) => {
         :disabled="!files.length || !anyUncompressed"
         @click="compressFiles"
       >
-        {{ files.length && !anyUncompressed ? 'All compressed!' : 'Compress' }}
+        {{ files.length && !anyUncompressed ? t('translation.allcompressed') : t('translation.compress') }}
       </button>
       <a
         :aria-busy="isZipCompressing"
@@ -94,21 +97,21 @@ watch(anyUncompressed, async (newVal) => {
         role="button"
         download
       >
-        Download ZIP
+        {{ t('translation.downloadzip') }}
       </a>
       <button
         :disabled="!files.length"
         class="secondary"
         @click="files = []"
       >
-        Clear List
+        {{ t('translation.clearlist') }}
       </button>
     </div>
     <div class="file-list">
       <FileItem
         v-for="file in files"
-        :key="file.id"
         :file-obj="file"
+        :key="file.id"
         @remove="removeItem(file)"
       />
     </div>
