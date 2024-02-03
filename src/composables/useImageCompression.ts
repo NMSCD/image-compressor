@@ -1,7 +1,7 @@
 import { compress, EImageType } from 'image-conversion';
+import { maxSize } from '@/variables/constants';
 
 export async function useImageCompression(file: File, quality: number = 1): Promise<File> {
-  const maxSize = 10000000;
   if (file.size < maxSize) return file; // if below 10 MB, don't do anything
   const res = await compress(file, {
     quality,

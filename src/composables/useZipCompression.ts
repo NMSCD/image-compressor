@@ -1,6 +1,6 @@
 import JSZip from 'jszip';
 import { storeToRefs } from 'pinia';
-import { useFileDataStore } from '../stores/fileData';
+import { useFileDataStore } from '@/stores/fileData';
 
 export async function useZipCompression(): Promise<string> {
   const zip = new JSZip();

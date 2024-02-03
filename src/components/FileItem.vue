@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watchEffect } from 'vue';
-import type { FileObj } from '../types/file';
-import { useI18n } from '../hooks/useI18n';
+import type { FileObj } from '@/types/file';
+import { useI18n } from '@/hooks/useI18n';
 
 const { t } = useI18n();
 

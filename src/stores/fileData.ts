@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { FileObj } from '../types/file';
+import type { FileObj } from '@/types/file';
 
 interface State {
   files: FileObj[];

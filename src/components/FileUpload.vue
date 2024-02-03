@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useFileDataStore } from '../stores/fileData';
+import { useFileDataStore } from '@/stores/fileData';
 import { storeToRefs } from 'pinia';
-import type { FileObj } from '../types/file';
-import { useI18n } from '../hooks/useI18n';
+import type { FileObj } from '@/types/file';
+import { useI18n } from '@/hooks/useI18n';
 
 const dragActive = ref(false);
 
