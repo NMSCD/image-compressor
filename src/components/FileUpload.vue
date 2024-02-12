@@ -69,7 +69,7 @@ function addFiles(uploadedFiles: FileList) {
   justify-content: center;
   align-items: center;
   height: 200px;
-  border-radius: var(--border-radius);
+  border-radius: var(--pico-border-radius);
   border: 2px dashed;
   cursor: pointer;
   transition:
@@ -90,7 +90,7 @@ function addFiles(uploadedFiles: FileList) {
     width: max-content;
     height: auto;
     padding: 5px;
-    border-radius: var(--border-radius);
+    border-radius: var(--pico-border-radius);
     border: 1px solid;
 
     &::file-selector-button {
