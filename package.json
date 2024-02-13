@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "@picocss/pico": "^2.0.0",
-    "image-conversion": "^2.1.1",
     "jszip": "^3.10.1",
     "pinia": "^2.1.6",
     "sass": "^1.64.1",
+    "simple-image-compressor": "^1.0.1",
     "vue": "^3.3.4",
     "vue-i18n": "^9.8.0"
   },
