@@ -16,7 +16,7 @@
     "jszip": "^3.10.1",
     "pinia": "^2.1.6",
     "sass": "^1.64.1",
-    "simple-image-compressor": "^1.0.1",
+    "simple-image-compressor": "^1.0.3",
     "vue": "^3.4.19",
     "vue-i18n": "^9.8.0"
   },
