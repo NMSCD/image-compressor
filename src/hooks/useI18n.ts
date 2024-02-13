@@ -1,4 +1,4 @@
-import { i18n, messages } from '../i18n';
+import { i18n, messages } from '@/i18n';
 
 // inspired by https://stackoverflow.com/questions/58434389/typescript-deep-keyof-of-a-nested-object
 

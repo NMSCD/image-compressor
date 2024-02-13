@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { watch, ref } from 'vue';
-import { useI18n } from '../hooks/useI18n';
+import { useI18n } from '@/hooks/useI18n';
 import ThemeSwitch from './ThemeSwitch.vue';
 
 const { t, locale } = useI18n();

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watchEffect } from 'vue';
-import type { FileObj } from '../types/file';
-import { useI18n } from '../hooks/useI18n';
+import type { FileObj } from '@/types/file';
+import { useI18n } from '@/hooks/useI18n';
 
 const { t } = useI18n();
 
@@ -59,8 +59,8 @@ const computeFileSize = (size: number) =>
       </div>
     </div>
     <a
-      :aria-disabled="!fileObj.isCompressed"
       :class="{ secondary: !fileObj.isCompressed }"
+      :disabled="!fileObj.isCompressed || undefined"
       :href="fileObj.isCompressed ? fileData : undefined"
       role="button"
       download
@@ -80,12 +80,13 @@ const computeFileSize = (size: number) =>
   display: flex;
   gap: 2rem;
   border: 1px solid;
-  border-radius: var(--border-radius);
+  border-radius: var(--pico-border-radius);
   padding: 0.25rem;
   padding-inline: 1rem;
   align-items: center;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
 
   .field-title {
     font-weight: bold;
