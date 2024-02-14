@@ -35,13 +35,9 @@ async function editFileObj(fileObj: FileObj) {
 async function compressFiles() {
   isCompressing.value = true;
 
-  const promises = [];
-
   const uncompressedFiles = files.value.filter((fileObj: FileObj) => !fileObj.isCompressed);
 
-  for (const fileObj of uncompressedFiles) {
-    promises.push(editFileObj(fileObj));
-  }
+  const promises = uncompressedFiles.map(editFileObj);
 
   await Promise.all(promises);
   isCompressing.value = false;
