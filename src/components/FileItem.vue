@@ -21,7 +21,7 @@ watchEffect(() => {
   }
 });
 
-const fileData = computed(() => URL.createObjectURL(props.fileObj.file));
+const objectUrl = computed(() => URL.createObjectURL(props.fileObj.file));
 
 const computeFileSize = (size: number) =>
   (size / (1024 * 1024)).toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 }); // NoSonar this is to convert byte to MB
@@ -31,12 +31,12 @@ const computeFileSize = (size: number) =>
   <div class="file-item">
     <div class="item-set">
       <a
-        :href="fileData"
+        :href="objectUrl"
         rel="noopener noreferrer"
         target="_blank"
       >
         <img
-          :src="fileData"
+          :src="objectUrl"
           alt="Image preview"
           class="preview"
           width="200"
@@ -64,7 +64,7 @@ const computeFileSize = (size: number) =>
       <a
         :class="{ secondary: !fileObj.isCompressed }"
         :disabled="!fileObj.isCompressed || undefined"
-        :href="fileObj.isCompressed ? fileData : undefined"
+        :href="fileObj.isCompressed ? objectUrl : undefined"
         role="button"
         download
         >{{ t('translation.download') }}</a

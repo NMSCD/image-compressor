@@ -8,6 +8,7 @@ import type { FileObj } from './types/file';
 import { computed, ref, watch } from 'vue';
 import { compressFile } from './functions/imageCompression';
 import { comressToZip } from './functions/zipCompression';
+import { paginate } from './functions/paginate';
 import { useI18n } from './hooks/useI18n';
 
 const { t } = useI18n();
@@ -20,13 +21,13 @@ const zipData = ref('');
 const isZipCompressing = ref(false);
 const anyUncompressed = computed(() => files.value.some((file) => !file.isCompressed));
 
+const availableThreads = Math.max(navigator.hardwareConcurrency - 2, 1);
+
 async function editFileObj(fileObj: FileObj) {
   try {
     const compressedFile = await compressFile(fileObj.file);
-    const item = files.value.find((item) => item.id === fileObj.id);
-    if (!item) return;
-    item.file = compressedFile;
-    item.isCompressed = true;
+    fileObj.file = compressedFile;
+    fileObj.isCompressed = true;
   } catch {
     fileObj.isTooLarge = true;
   }
@@ -37,9 +38,13 @@ async function compressFiles() {
 
   const uncompressedFiles = files.value.filter((fileObj: FileObj) => !fileObj.isCompressed);
 
-  const promises = uncompressedFiles.map(editFileObj);
+  const paginatedFileArray = paginate(uncompressedFiles, availableThreads);
 
-  await Promise.all(promises);
+  for (const subArray of paginatedFileArray) {
+    const promises = subArray.map(editFileObj);
+    await Promise.all(promises);
+  }
+
   isCompressing.value = false;
 }
 
