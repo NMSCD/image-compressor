@@ -47,6 +47,7 @@ async function compressFiles() {
 
   isCompressing.value = false;
 
+  URL.revokeObjectURL(zipData.value);
   isZipCompressing.value = true;
   zipData.value = await compressToZip();
   isZipCompressing.value = false;
