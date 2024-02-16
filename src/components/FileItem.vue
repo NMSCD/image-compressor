@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect, watch, onUnmounted } from 'vue';
 import type { FileObj } from '@/types/file';
 import { useI18n } from '@/hooks/useI18n';
 
@@ -23,8 +23,12 @@ watchEffect(() => {
 
 const objectUrl = computed(() => URL.createObjectURL(props.fileObj.file));
 
+watch(objectUrl, (_, oldUrl) => URL.revokeObjectURL(oldUrl));
+
 const computeFileSize = (size: number) =>
   (size / (1024 * 1024)).toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 }); // NoSonar this is to convert byte to MB
+
+onUnmounted(() => URL.revokeObjectURL(objectUrl.value));
 </script>
 
 <template>
