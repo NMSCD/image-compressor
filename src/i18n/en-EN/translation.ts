@@ -15,6 +15,6 @@ export default {
   allcompressed: 'All Compressed!',
   compress: 'Compress',
   filelist: 'File List',
-  downloadzip: 'Dowload ZIP',
+  downloadzip: 'Download ZIP',
   clearlist: 'Clear List',
 };
