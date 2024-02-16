@@ -5,9 +5,9 @@ import FileItem from './components/FileItem.vue';
 import { useFileDataStore } from './stores/fileData';
 import { storeToRefs } from 'pinia';
 import type { FileObj } from './types/file';
-import { computed, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 import { compressFile } from './functions/imageCompression';
-import { comressToZip } from './functions/zipCompression';
+import { compressToZip } from './functions/zipCompression';
 import { paginate } from './functions/paginate';
 import { useI18n } from './hooks/useI18n';
 
@@ -46,19 +46,15 @@ async function compressFiles() {
   }
 
   isCompressing.value = false;
+
+  isZipCompressing.value = true;
+  zipData.value = await compressToZip();
+  isZipCompressing.value = false;
 }
 
 function removeItem(file: FileObj) {
   files.value = files.value.filter((item) => item !== file);
 }
-
-watch(anyUncompressed, async (newVal) => {
-  if (files.value.length && !newVal) {
-    isZipCompressing.value = true;
-    zipData.value = await comressToZip();
-    isZipCompressing.value = false;
-  }
-});
 </script>
 
 <template>
@@ -93,7 +89,7 @@ watch(anyUncompressed, async (newVal) => {
       </button>
       <a
         :aria-busy="isZipCompressing"
-        :aria-disabled="!zipData"
+        :disabled="!zipData || undefined"
         :href="zipData || undefined"
         role="button"
         download
