@@ -6,8 +6,8 @@ import { useFileDataStore } from './stores/fileData';
 import { storeToRefs } from 'pinia';
 import type { FileObj } from './types/file';
 import { computed, ref, watch } from 'vue';
-import { useImageCompression } from './composables/useImageCompression';
-import { useZipCompression } from './composables/useZipCompression';
+import { compressFile } from './functions/imageCompression';
+import { comressToZip } from './functions/zipCompression';
 import { useI18n } from './hooks/useI18n';
 
 const { t } = useI18n();
@@ -22,7 +22,7 @@ const anyUncompressed = computed(() => files.value.some((file) => !file.isCompre
 
 async function editFileObj(fileObj: FileObj) {
   try {
-    const compressedFile = await useImageCompression(fileObj.file);
+    const compressedFile = await compressFile(fileObj.file);
     const item = files.value.find((item) => item.id === fileObj.id);
     if (!item) return;
     item.file = compressedFile;
@@ -50,7 +50,7 @@ function removeItem(file: FileObj) {
 watch(anyUncompressed, async (newVal) => {
   if (files.value.length && !newVal) {
     isZipCompressing.value = true;
-    zipData.value = await useZipCompression();
+    zipData.value = await comressToZip();
     isZipCompressing.value = false;
   }
 });
