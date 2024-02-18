@@ -7,7 +7,7 @@ export default {
   compressedsize: 'Tamaño comprimido:',
   download: 'Descargar',
   error: 'Error:',
-  filetoolarge: '¡El archivo es demasiado grande!',
+  hasFailed: '¡El archivo es demasiado grande!',
   header: 'Compresor de imágenes',
   subtitle: 'Comprime imágenes a <10 MB',
   buttonwiki: 'Abrir página carga imágenes Wiki NMS',

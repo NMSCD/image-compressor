@@ -57,10 +57,10 @@ onUnmounted(() => URL.revokeObjectURL(objectUrl.value));
           <span class="field-title">{{ t('translation.compressedsize') }}</span> {{ computeFileSize(compSize) }}MB
         </div>
         <div
-          v-if="fileObj.isTooLarge"
+          v-if="fileObj.isError"
           class="error"
         >
-          <span class="field-title">{{ t('translation.error') }}</span> {{ t('translation.filetoolarge') }}
+          <span class="field-title">{{ t('translation.error') }}</span> {{ t('translation.hasFailed') }}
         </div>
       </div>
     </div>

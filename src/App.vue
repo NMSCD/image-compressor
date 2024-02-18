@@ -29,7 +29,7 @@ async function editFileObj(fileObj: FileObj) {
     fileObj.file = compressedFile;
     fileObj.isCompressed = true;
   } catch {
-    fileObj.isTooLarge = true;
+    fileObj.isError = true;
   }
 }
 
@@ -38,12 +38,17 @@ async function compressFiles() {
 
   const uncompressedFiles = files.value.filter((fileObj: FileObj) => !fileObj.isCompressed);
 
+  // option 1 (no errors, slower)
   const paginatedFileArray = paginate(uncompressedFiles, availableThreads);
 
   for (const subArray of paginatedFileArray) {
     const promises = subArray.map(editFileObj);
     await Promise.all(promises);
   }
+
+  // option 2 (errors, faster -> better option once the errors are fixed in Firefox)
+  // const promises = uncompressedFiles.map(editFileObj);
+  // await Promise.all(promises);
 
   isCompressing.value = false;
 

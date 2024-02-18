@@ -7,7 +7,7 @@ export default {
   compressedsize: 'Tamaina komprimatuta:',
   download: 'Deskargatu',
   error: 'Akats:',
-  filetoolarge: 'Fitxategia handiegia da!',
+  hasFailed: 'Fitxategia handiegia da!',
   header: 'Irudi-konpresorea',
   subtitle: 'Konprimitu irudiak < 10 MBra',
   buttonwiki: 'Ireki NMS Wiki-ko argazkiak igotzeko orria',
