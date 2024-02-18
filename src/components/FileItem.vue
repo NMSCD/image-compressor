@@ -68,9 +68,9 @@ onUnmounted(() => URL.revokeObjectURL(objectUrl.value));
       <a
         :class="{ secondary: !fileObj.isCompressed }"
         :disabled="!fileObj.isCompressed || undefined"
+        :download="fileObj.file.name"
         :href="fileObj.isCompressed ? objectUrl : undefined"
         role="button"
-        download
         >{{ t('translation.download') }}</a
       >
       <button
