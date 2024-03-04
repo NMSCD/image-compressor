@@ -15,7 +15,7 @@
     "pinia": "^2.1.6",
     "sass": "^1.71.1",
     "simple-image-compressor": "^1.4.2",
-    "vue": "^3.4.20",
+    "vue": "^3.4.21",
     "vue-i18n": "^9.10.1"
   },
   "devDependencies": {
