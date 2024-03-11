@@ -1,6 +1,6 @@
 export interface FileObj {
   id: number;
   isCompressed: boolean;
-  isTooLarge: boolean;
+  isError: boolean;
   file: File;
 }

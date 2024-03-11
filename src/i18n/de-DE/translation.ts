@@ -7,7 +7,7 @@ export default {
   compressedsize: 'Komprimierte Größe:',
   download: 'Herunterladen',
   error: 'Fehler:',
-  filetoolarge: 'Datei ist zu groß!',
+  hasFailed: 'Datei konnte nicht komprimiert werden',
   header: 'Bild Kompressor',
   subtitle: 'Komprimiert Bilder auf < 10MB',
   buttonwiki: 'NMS Wiki Bild Upload öffnen',

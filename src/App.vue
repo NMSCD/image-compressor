@@ -5,9 +5,10 @@ import FileItem from './components/FileItem.vue';
 import { useFileDataStore } from './stores/fileData';
 import { storeToRefs } from 'pinia';
 import type { FileObj } from './types/file';
-import { computed, ref, watch } from 'vue';
-import { useImageCompression } from './composables/useImageCompression';
-import { useZipCompression } from './composables/useZipCompression';
+import { computed, ref } from 'vue';
+import { compressFile } from './functions/imageCompression';
+import { compressToZip } from './functions/zipCompression';
+import { paginate } from './functions/paginate';
 import { useI18n } from './hooks/useI18n';
 
 const { t } = useI18n();
@@ -20,44 +21,46 @@ const zipData = ref('');
 const isZipCompressing = ref(false);
 const anyUncompressed = computed(() => files.value.some((file) => !file.isCompressed));
 
+const availableThreads = Math.max(navigator.hardwareConcurrency - 2, 1);
+
 async function editFileObj(fileObj: FileObj) {
   try {
-    const compressedFile = await useImageCompression(fileObj.file);
-    const item = files.value.find((item) => item.id === fileObj.id);
-    if (!item) return;
-    item.file = compressedFile;
-    item.isCompressed = true;
+    const compressedFile = await compressFile(fileObj.file);
+    fileObj.file = compressedFile;
+    fileObj.isCompressed = true;
   } catch {
-    fileObj.isTooLarge = true;
+    fileObj.isError = true;
   }
 }
 
 async function compressFiles() {
   isCompressing.value = true;
 
-  const promises = [];
-
   const uncompressedFiles = files.value.filter((fileObj: FileObj) => !fileObj.isCompressed);
 
-  for (const fileObj of uncompressedFiles) {
-    promises.push(editFileObj(fileObj));
+  // option 1 (no errors, slower)
+  const paginatedFileArray = paginate(uncompressedFiles, availableThreads);
+
+  for (const subArray of paginatedFileArray) {
+    const promises = subArray.map(editFileObj);
+    await Promise.all(promises);
   }
 
-  await Promise.all(promises);
+  // option 2 (errors, faster -> better option once the errors are fixed in Firefox)
+  // const promises = uncompressedFiles.map(editFileObj);
+  // await Promise.all(promises);
+
   isCompressing.value = false;
+
+  URL.revokeObjectURL(zipData.value);
+  isZipCompressing.value = true;
+  zipData.value = await compressToZip();
+  isZipCompressing.value = false;
 }
 
 function removeItem(file: FileObj) {
   files.value = files.value.filter((item) => item !== file);
 }
-
-watch(anyUncompressed, async (newVal) => {
-  if (files.value.length && !newVal) {
-    isZipCompressing.value = true;
-    zipData.value = await useZipCompression();
-    isZipCompressing.value = false;
-  }
-});
 </script>
 
 <template>
@@ -92,7 +95,7 @@ watch(anyUncompressed, async (newVal) => {
       </button>
       <a
         :aria-busy="isZipCompressing"
-        :aria-disabled="!zipData"
+        :disabled="!zipData || undefined"
         :href="zipData || undefined"
         role="button"
         download
