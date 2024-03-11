@@ -88,7 +88,7 @@ function removeItem(file: FileObj) {
       <button
         :aria-busy="isCompressing"
         :class="{ 'is-success': files.length && !anyUncompressed }"
-        :disabled="!files.length || !anyUncompressed"
+        :disabled="!files.length || !anyUncompressed || isCompressing"
         @click="compressFiles"
       >
         {{ files.length && !anyUncompressed ? t('translation.allcompressed') : t('translation.compress') }}
