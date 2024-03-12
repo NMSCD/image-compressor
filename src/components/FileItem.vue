@@ -41,7 +41,7 @@ onUnmounted(() => URL.revokeObjectURL(objectUrl.value));
       >
         <img
           :src="objectUrl"
-          alt="Image preview"
+          alt="Preview"
           class="preview"
           width="200"
         />

@@ -2,13 +2,10 @@
 import NavBar from './components/NavBar.vue';
 import FileUpload from './components/FileUpload.vue';
 import FileItem from './components/FileItem.vue';
+import ControlButtons from './components/ControlButtons.vue';
 import { useFileDataStore } from './stores/fileData';
 import { storeToRefs } from 'pinia';
 import type { FileObj } from './types/file';
-import { computed, ref } from 'vue';
-import { compressFile } from './functions/imageCompression';
-import { compressToZip } from './functions/zipCompression';
-import { paginate } from './functions/paginate';
 import { useI18n } from './hooks/useI18n';
 
 const { t } = useI18n();
@@ -16,51 +13,7 @@ const { t } = useI18n();
 const fileDataStore = useFileDataStore();
 const { files } = storeToRefs(fileDataStore);
 
-const isCompressing = ref(false);
-const zipData = ref('');
-const isZipCompressing = ref(false);
-const anyUncompressed = computed(() => files.value.some((file) => !file.isCompressed));
-
-const availableThreads = Math.max(navigator.hardwareConcurrency - 2, 1);
-
-async function editFileObj(fileObj: FileObj) {
-  try {
-    const compressedFile = await compressFile(fileObj.file);
-    fileObj.file = compressedFile;
-    fileObj.isCompressed = true;
-  } catch {
-    fileObj.isError = true;
-  }
-}
-
-async function compressFiles() {
-  isCompressing.value = true;
-
-  const uncompressedFiles = files.value.filter((fileObj: FileObj) => !fileObj.isCompressed);
-
-  // option 1 (no errors, slower)
-  const paginatedFileArray = paginate(uncompressedFiles, availableThreads);
-
-  for (const subArray of paginatedFileArray) {
-    const promises = subArray.map(editFileObj);
-    await Promise.all(promises);
-  }
-
-  // option 2 (errors, faster -> better option once the errors are fixed in Firefox)
-  // const promises = uncompressedFiles.map(editFileObj);
-  // await Promise.all(promises);
-
-  isCompressing.value = false;
-
-  URL.revokeObjectURL(zipData.value);
-  isZipCompressing.value = true;
-  zipData.value = await compressToZip();
-  isZipCompressing.value = false;
-}
-
-function removeItem(file: FileObj) {
-  files.value = files.value.filter((item) => item !== file);
-}
+const removeItem = (file: FileObj) => (files.value = files.value.filter((item) => item !== file));
 </script>
 
 <template>
@@ -84,32 +37,7 @@ function removeItem(file: FileObj) {
     <FileUpload />
 
     <h2 class="subheading">{{ t('translation.filelist') }}</h2>
-    <div class="buttons">
-      <button
-        :aria-busy="isCompressing"
-        :class="{ 'is-success': files.length && !anyUncompressed }"
-        :disabled="!files.length || !anyUncompressed"
-        @click="compressFiles"
-      >
-        {{ files.length && !anyUncompressed ? t('translation.allcompressed') : t('translation.compress') }}
-      </button>
-      <a
-        :aria-busy="isZipCompressing"
-        :disabled="!zipData || undefined"
-        :href="zipData || undefined"
-        role="button"
-        download
-      >
-        {{ t('translation.downloadzip') }}
-      </a>
-      <button
-        :disabled="!files.length"
-        class="secondary"
-        @click="files = []"
-      >
-        {{ t('translation.clearlist') }}
-      </button>
-    </div>
+    <ControlButtons />
     <div class="file-list">
       <FileItem
         v-for="file in files"
@@ -154,24 +82,5 @@ function removeItem(file: FileObj) {
   flex-direction: column;
   gap: 0.25rem;
   width: fit-content;
-}
-
-.is-success {
-  background-color: mediumseagreen;
-  border: 1px solid darkseagreen;
-}
-
-.buttons {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-block-end: 1rem;
-
-  & > * {
-    flex-grow: 1;
-    width: fit-content;
-    height: fit-content;
-    margin: 0;
-  }
 }
 </style>
