@@ -5,10 +5,9 @@ import FileItem from './components/FileItem.vue';
 import { useFileDataStore } from './stores/fileData';
 import { storeToRefs } from 'pinia';
 import type { FileObj } from './types/file';
-import { computed, ref } from 'vue';
+import { computed, ref, watch, watchEffect } from 'vue';
 import { compressFile } from './functions/imageCompression';
 import { compressToZip } from './functions/zipCompression';
-import { paginate } from './functions/paginate';
 import { useI18n } from './hooks/useI18n';
 
 const { t } = useI18n();
@@ -16,10 +15,14 @@ const { t } = useI18n();
 const fileDataStore = useFileDataStore();
 const { files } = storeToRefs(fileDataStore);
 
+const getUncompressedFiles = (fileObj: FileObj) => !fileObj.isCompressed;
+
 const isCompressing = ref(false);
 const zipData = ref('');
 const isZipCompressing = ref(false);
-const anyUncompressed = computed(() => files.value.some((file) => !file.isCompressed));
+const uncompressedFiles = computed(() => files.value.filter(getUncompressedFiles));
+const anyUncompressed = computed(() => Boolean(uncompressedFiles.value.length));
+const toCompress = ref<FileObj[]>([]);
 
 const availableThreads = Math.max(navigator.hardwareConcurrency - 2, 1);
 
@@ -34,34 +37,43 @@ async function editFileObj(fileObj: FileObj) {
   }
 }
 
-async function compressFiles() {
-  isCompressing.value = true;
-
-  const uncompressedFiles = files.value.filter((fileObj: FileObj) => !fileObj.isCompressed);
-
-  // option 1 (no errors, slower)
-  const paginatedFileArray = paginate(uncompressedFiles, availableThreads);
-
-  for (const subArray of paginatedFileArray) {
-    const promises = subArray.map(editFileObj);
-    await Promise.all(promises);
+// add files to toCompress array when a thread is available
+watchEffect(() => {
+  if (isCompressing.value) {
+    const amountToPush = availableThreads - toCompress.value.filter(getUncompressedFiles).length;
+    const pool = uncompressedFiles.value.filter((item) => !toCompress.value.includes(item)).slice(0, amountToPush);
+    if (pool.length) toCompress.value = [...toCompress.value, ...pool];
   }
+});
 
-  // option 2 (errors, faster -> better option once the errors are fixed in Firefox)
-  // const promises = uncompressedFiles.map(editFileObj);
-  // await Promise.all(promises);
+// compress new files that are added to the toCompress array
+watch(toCompress, (newVal, oldVal) => {
+  const filesToCompress = newVal.filter((item) => !oldVal.includes(item));
+  filesToCompress.forEach(editFileObj);
+});
 
-  isCompressing.value = false;
+// set isCompressing to false when compression finished
+watchEffect(() => {
+  if (!uncompressedFiles.value.length && isCompressing.value) {
+    isCompressing.value = false;
+    toCompress.value = [];
+  }
+});
 
-  URL.revokeObjectURL(zipData.value);
-  isZipCompressing.value = true;
-  zipData.value = await compressToZip();
-  isZipCompressing.value = false;
-}
+// zip files when everything is compressed
+watch(isCompressing, async (newVal, oldVal) => {
+  if (oldVal && !newVal) {
+    URL.revokeObjectURL(zipData.value);
+    isZipCompressing.value = true;
+    zipData.value = await compressToZip();
+    isZipCompressing.value = false;
+  }
+});
 
-function removeItem(file: FileObj) {
-  files.value = files.value.filter((item) => item !== file);
-}
+// initiate compression
+const compressFiles = () => (isCompressing.value = true);
+
+const removeItem = (file: FileObj) => (files.value = files.value.filter((item) => item !== file));
 </script>
 
 <template>
