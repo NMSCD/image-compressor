@@ -28,6 +28,7 @@ async function editFileObj(fileObj: FileObj) {
     const compressedFile = await compressFile(fileObj.file);
     fileObj.file = compressedFile;
     fileObj.isCompressed = true;
+    fileObj.isError = false;
   } catch {
     fileObj.isError = true;
   }
