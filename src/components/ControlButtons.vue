@@ -21,7 +21,10 @@ const uncompressedFiles = computed(() => files.value.filter(getUncompressedFiles
 const anyUncompressed = computed(() => Boolean(uncompressedFiles.value.length));
 const toCompress = ref<FileObj[]>([]);
 
+// limit to 6 concurrent workers in order to work around a bug in Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=1885198
+const workerLimit = 6;
 const availableThreads = Math.max(navigator.hardwareConcurrency - 2, 1);
+const workerThreadAmount = Math.min(workerLimit, availableThreads);
 
 async function editFileObj(fileObj: FileObj) {
   try {
@@ -37,7 +40,7 @@ async function editFileObj(fileObj: FileObj) {
 // add files to toCompress array when a thread is available
 watchEffect(() => {
   if (isCompressing.value) {
-    const amountToPush = availableThreads - toCompress.value.filter(getUncompressedFiles).length;
+    const amountToPush = workerThreadAmount - toCompress.value.filter(getUncompressedFiles).length;
     const pool = uncompressedFiles.value.filter((item) => !toCompress.value.includes(item)).slice(0, amountToPush);
     if (pool.length) toCompress.value = [...toCompress.value, ...pool];
   }
