@@ -16,7 +16,7 @@
     "sass": "^1.74.1",
     "simple-image-compressor": "^1.8.0",
     "vue": "^3.4.21",
-    "vue-i18n": "^9.11.0"
+    "vue-i18n": "^9.12.1"
   },
   "devDependencies": {
     "@types/node": "^20.12.2",
